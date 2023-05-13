@@ -1,54 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
-
 model User {
-  id               Int          @id @default(autoincrement())
-  auth0UserId      String       @unique
-  username         String       @unique
-  email            String       @unique
-  phoneNumber      String?
-  bio              String?
-  posts            Post[]
-  homeLocation     Location?    @relation(fields: [homeLocationId], references: [id])
-  homeLocationId   Int?         @unique
-  verified         Boolean      @default(false)
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
-  profileImageURL  String?
-  sentMessages     Message[]    @relation("MessageToUser")
-  receivedMessages Message[]    @relation("UserToMessage")
-  following        UserFollow[] @relation("FollowingRelation")
-  followers        UserFollow[] @relation("FollowersRelation")
-  Like             Like[]
-  Comment          Comment[]
-}
-
-model UserFollow {
-  id          Int      @id @default(autoincrement())
-  followerId  Int
-  followingId Int
-  createdAt   DateTime @default(now())
-  follower    User     @relation("FollowersRelation", fields: [followerId], references: [id])
-  following   User     @relation("FollowingRelation", fields: [followingId], references: [id])
-
-  @@unique([followerId, followingId])
-}
-
-model Message {
-  id         Int      @id @default(autoincrement())
-  content    String
-  sender     User     @relation("MessageToUser", fields: [senderId], references: [id])
-  senderId   Int
-  receiver   User     @relation("UserToMessage", fields: [receiverId], references: [id])
-  receiverId Int
-  createdAt  DateTime @default(now())
+  id             Int       @id @default(autoincrement())
+  auth0UserId    String    @unique
+  username       String    @unique
+  email          String    @unique
+  phoneNumber    String?
+  bio            String?
+  posts          Post[]
+  homeLocation   Location? @relation(fields: [homeLocationId], references: [id])
+  homeLocationId Int?      @unique
+  verified       Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  profileImageURL String?
 }
 
 model Post {
@@ -59,30 +31,9 @@ model Post {
   authorId   Int
   location   Location  @relation(fields: [locationId], references: [id])
   locationId Int
-  likes      Like[]
-  comments   Comment[]
   tags       String[]
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-}
-
-model Like {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
-  createdAt DateTime @default(now())
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
-  createdAt DateTime @default(now())
 }
 
 model Location {
