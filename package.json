@@ -22,11 +22,11 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "3.3.1",
+    "@graphql-codegen/introspection": "3.0.1",
     "@graphql-codegen/typescript": "3.0.4",
     "@graphql-codegen/typescript-resolvers": "3.2.1",
     "prisma": "^4.14.0",
     "serverless-plugin-typescript": "^2.1.4",
-    "typescript": "^5.0.4",
-    "@graphql-codegen/introspection": "3.0.1"
+    "typescript": "^5.0.4"
   }
 }
