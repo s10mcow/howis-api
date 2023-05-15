@@ -67,6 +67,7 @@ export const resolvers: Resolvers = {
       return newPost;
     },
     createUser: async (_, { username, auth0UserId, email }, { prisma }) => {
+      
       const newUser = await prisma.user.create({
         data: {
           username,

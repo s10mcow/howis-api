@@ -3,8 +3,12 @@ import { resolve } from "path";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { ApolloServer } from "@apollo/server";
 import { resolvers } from "./resolvers";
+import { PrismaClient } from "@prisma/client";
 
-type ApolloContext = {};
+const prisma = new PrismaClient();
+type ApolloContext = {
+  prisma: PrismaClient;
+};
 
 const GRAPHQL_SCHEMA_PATH = resolve(__dirname, "schema_simple.graphql");
 
@@ -17,6 +21,7 @@ const server = new ApolloServer<ApolloContext>({
 
 startStandaloneServer(server, {
   listen: { port: 4000 },
+  context: async () => ({ prisma }),
 }).then((result) => {
   console.log(`🚀 Server ready at: ${result.url}`);
 });
