@@ -8,7 +8,7 @@
     "start": "nodemon --watch \"*.ts\" --exec \"ts-node --esm\" ./src/server.ts",
     "start-prod": "ts-node --esm ./src/server.ts",
     "eslint:fix": "eslint --fix",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +19,10 @@
     "graphql": "^16.6.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^3.3.1",
-    "@graphql-codegen/typescript": "^3.0.4",
-    "@graphql-codegen/typescript-resolvers": "^3.2.1",
+    "@graphql-codegen/cli": "3.3.1",
+    "@graphql-codegen/typescript": "3.0.4",
+    "@graphql-codegen/typescript-resolvers": "3.2.1",
+    "@graphql-codegen/introspection": "3.0.1",
     "@types/node": "^18.15.2",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
