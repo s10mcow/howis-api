@@ -1,3 +1,5 @@
+org: stenmuchow
+app: apollo-lambda
 service: apollo-lambda
 provider:
   name: aws
