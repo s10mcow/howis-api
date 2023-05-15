@@ -1,5 +1,4 @@
-import { parse } from "graphql";
-import { Resolvers } from "./generated/graphql";
+import { Resolvers } from "../types/types";
 
 export const resolvers: Resolvers = {
   Query: {
@@ -106,8 +105,8 @@ export const resolvers: Resolvers = {
           tags,
           location: {
             update: {
-              latitude: location.latitude,
-              longitude: location.longitude,
+              latitude: location?.latitude,
+              longitude: location?.longitude,
             },
           },
         },
