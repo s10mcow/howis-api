@@ -2,11 +2,11 @@
   "name": "howis-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "type": "module",
+  "main": "index.ts",  
   "scripts": {
     "compile": "tsc",
-    "start": "nodemon --watch \"*.ts\" --exec \"ts-node\" ./src/index.ts",
+    "start": "nodemon --watch \"*.ts\" --exec \"ts-node --esm\" ./src/index.ts",
+    "start-prod": "ts-node --esm ./src/index.ts",
     "eslint:fix": "eslint --fix",
     "codegen": "graphql-codegen --config codegen.yml"
   },
