@@ -19,9 +19,6 @@ functions:
       - httpApi:
           path: /
           method: GET
-    package:
-      patterns:
-        - "src/schema_simple.graphql"
 # Omit the following lines if you aren't using TS!
 plugins:
   - serverless-plugin-typescript
