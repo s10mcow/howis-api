@@ -62,7 +62,6 @@ export const typeDefs = gql`
       orderBy: PostOrderBy
       order: SortOrder
     ): [Post!]!
-    hello: String
   }
 
   type Mutation {

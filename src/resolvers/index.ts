@@ -2,7 +2,6 @@ import { Resolvers } from "../types/types";
 
 export const resolvers: Resolvers = {
   Query: {
-    hello: () => "Hello world!",
     getUser: async (_parent, { id }, { prisma }) => {
       const user = await prisma.user.findUnique({
         where: { id: Number(id) },
