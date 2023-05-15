@@ -1,17 +1,17 @@
 org: stenmuchow
-app: apollo-lambda
-service: apollo-lambda
+app: howisthesurf
+service: apollo-lambda-api
+useDotenv: true
 provider:
   name: aws
   runtime: nodejs16.x
   httpApi:
     cors: true
+  environment:
+    DATABASE_URL: ${env.DATABASE_URL}
 functions:
   graphql:
-    # Make sure your file path is correct!
-    # (e.g., if your file is in the root folder use server.graphqlHandler )
-    # The format is: <FILENAME>.<HANDLER>
-    handler: src/server.graphqlHandler # highlight-line
+    handler: src/server.graphqlHandler
     events:
       - httpApi:
           path: /
@@ -19,6 +19,12 @@ functions:
       - httpApi:
           path: /
           method: GET
-# Omit the following lines if you aren't using TS!
 plugins:
   - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+package:
+  patterns:
+    - "!node_modules/.prisma/client/libquery_engine-*"
+    - "node_modules/.prisma/client/libquery_engine-rhel-*"
+    - "!node_modules/prisma/libquery_engine-*"
+    - "!node_modules/@prisma/engines/**"

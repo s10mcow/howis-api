@@ -17,8 +17,10 @@
     "@apollo/server": "^4.7.1",
     "@as-integrations/aws-lambda": "^2.0.1",
     "@prisma/client": "^4.14.0",
+    "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-plugin-typescript": "^2.1.4"
   },
   "devDependencies": {
