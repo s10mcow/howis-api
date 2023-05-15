@@ -59,6 +59,7 @@ type Query {
     orderBy: PostOrderBy
     order: SortOrder
   ): [Post!]!
+  hello: String
 }
 
 type Mutation {

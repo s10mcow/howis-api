@@ -2,6 +2,7 @@ import { Resolvers } from "../types/types";
 
 export const resolvers: Resolvers = {
   Query: {
+    hello: () => "Hello world!",
     getUser: async (_parent, { id }, { prisma }) => {
       const user = await prisma.user.findUnique({
         where: { id: Number(id) },
@@ -54,7 +55,7 @@ export const resolvers: Resolvers = {
         data: {
           photoURL,
           caption,
-          tags,
+          tags: tags || undefined,
           author: { connect: { id: Number(userId) } },
           location: { create: location },
         },
@@ -67,7 +68,6 @@ export const resolvers: Resolvers = {
       return newPost;
     },
     createUser: async (_, { username, auth0UserId, email }, { prisma }) => {
-      
       const newUser = await prisma.user.create({
         data: {
           username,
@@ -101,9 +101,9 @@ export const resolvers: Resolvers = {
       const updatedPost = await prisma.post.update({
         where: { id: Number(id) },
         data: {
-          photoURL,
+          photoURL: photoURL || undefined,
           caption,
-          tags,
+          tags: tags || undefined,
           location: {
             update: {
               latitude: location?.latitude,
@@ -152,7 +152,10 @@ export const resolvers: Resolvers = {
     updateUser: async (_, { id, username, email }, { prisma }) => {
       const updatedUser = await prisma.user.update({
         where: { id: Number(id) },
-        data: { username, email },
+        data: {
+          username: username || undefined,
+          email: email || undefined,
+        },
       });
 
       return updatedUser;

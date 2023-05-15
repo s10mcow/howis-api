@@ -1,7 +1,4 @@
-# serverless.yml
-
-service: api
-frameworkVersion: "3"
+service: apollo-lambda
 provider:
   name: aws
   runtime: nodejs16.x
@@ -20,6 +17,9 @@ functions:
       - httpApi:
           path: /
           method: GET
+    package:
+      patterns:
+        - "src/schema_simple.graphql"
 # Omit the following lines if you aren't using TS!
 plugins:
   - serverless-plugin-typescript
