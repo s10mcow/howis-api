@@ -1,5 +1,3 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
 import { ApolloServer } from "@apollo/server";
 import { resolvers } from "./resolvers";
 import { typeDefs } from "./schema";
@@ -19,13 +17,6 @@ const server = new ApolloServer<ApolloContext>({
   typeDefs,
   resolvers,
 });
-
-// startStandaloneServer(server, {
-//   listen: { port: 4000 },
-//   context: async () => ({ prisma }),
-// }).then((result) => {
-//   console.log(`🚀 Server ready at: ${result.url}`);
-// });
 
 export const graphqlHandler = startServerAndCreateLambdaHandler(
   server,
