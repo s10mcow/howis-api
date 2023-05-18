@@ -5,8 +5,9 @@ export const resolvers: Resolvers = {
     getUser: async (_parent, { id }, { prisma }) => {
       const user = await prisma.user.findUnique({
         where: { id: Number(id) },
-        include: { homeLocation: true },
+        // include: { homeLocation: true },
       });
+
       if (!user) {
         throw new Error(`No user found for id: ${id}`);
       }
@@ -17,6 +18,7 @@ export const resolvers: Resolvers = {
         where: { id: Number(id) },
         include: { author: true, location: true },
       });
+
       return post;
     },
     getPostsNearLocation: async (
@@ -66,11 +68,16 @@ export const resolvers: Resolvers = {
 
       return newPost;
     },
-    createUser: async (_, { username, auth0UserId, email }, { prisma }) => {
+    createUser: async (
+      _,
+      { sub, first_name, last_name, email },
+      { prisma }
+    ) => {
       const newUser = await prisma.user.create({
         data: {
-          username,
-          auth0UserId,
+          sub,
+          first_name,
+          last_name,
           email,
         },
       });
@@ -148,11 +155,10 @@ export const resolvers: Resolvers = {
 
       return user;
     },
-    updateUser: async (_, { id, username, email }, { prisma }) => {
+    updateUser: async (_, { id, email }, { prisma }) => {
       const updatedUser = await prisma.user.update({
         where: { id: Number(id) },
         data: {
-          username: username || undefined,
           email: email || undefined,
         },
       });

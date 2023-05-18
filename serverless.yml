@@ -1,12 +1,12 @@
 org: stenmuchow
 app: howisthesurf
-service: apollo-lambda-api
+service: howisthesurf
 useDotenv: true
 provider:
   name: aws
-  runtime: nodejs16.x
-  httpApi:
-    cors: true
+  runtime: nodejs18.x
+  region: us-east-2
+  stage: ${opt:stage, 'dev'}
   environment:
     DATABASE_URL: ${env.DATABASE_URL}
 functions:
@@ -19,6 +19,14 @@ functions:
       - httpApi:
           path: /
           method: GET
+  postConfirmation:
+    handler: hook/cognito.postSignupHandler
+    events:
+      - cognitoUserPool:
+          pool: ${self:service}-${self:provider.stage}
+          trigger: PostConfirmation
+          existing: true
+          forceDeploy: true
 plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin

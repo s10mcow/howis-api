@@ -10,8 +10,9 @@ datasource db {
 
 model User {
   id             Int       @id @default(autoincrement())
-  auth0UserId    String    @unique
-  username       String    @unique
+  sub            String    @unique  
+  first_name     String
+  last_name      String
   email          String    @unique
   phoneNumber    String?
   bio            String?

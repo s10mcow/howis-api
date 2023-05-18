@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-howisthesurf-dev-81239-authRole",
+      "UnauthRoleArn": "arn:aws:iam::890372599078:role/amplify-howisthesurf-dev-81239-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::890372599078:role/amplify-howisthesurf-dev-81239-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-howisthesurf-dev-81239-deployment",
+      "UnauthRoleName": "amplify-howisthesurf-dev-81239-unauthRole",
+      "StackName": "amplify-howisthesurf-dev-81239",
+      "StackId": "arn:aws:cloudformation:us-east-2:890372599078:stack/amplify-howisthesurf-dev-81239/1f6701b0-f4ac-11ed-8678-065f2cf72cdb",
+      "AmplifyAppId": "d2aekhtgazovda"
+    }
+  }
+}

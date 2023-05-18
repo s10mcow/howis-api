@@ -51,12 +51,13 @@ export type MutationCreatePostArgs = {
 
 
 export type MutationCreateUserArgs = {
-  auth0UserId: Scalars['String'];
   bio?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   phoneNumber?: InputMaybe<Scalars['String']>;
   profileImageURL?: InputMaybe<Scalars['String']>;
-  username: Scalars['String'];
+  sub: Scalars['String'];
 };
 
 
@@ -79,7 +80,6 @@ export type MutationUpdateUserArgs = {
   email?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   phoneNumber?: InputMaybe<Scalars['String']>;
-  username?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -169,17 +169,18 @@ export enum SortOrder {
 
 export type User = {
   __typename?: 'User';
-  auth0UserId: Scalars['String'];
   bio?: Maybe<Scalars['String']>;
   createdAt: Scalars['Date'];
   email: Scalars['String'];
+  first_name: Scalars['String'];
   homeLocation?: Maybe<Location>;
   id: Scalars['Int'];
+  last_name: Scalars['String'];
   phoneNumber?: Maybe<Scalars['String']>;
   posts?: Maybe<Array<Post>>;
   profileImageURL?: Maybe<Scalars['String']>;
+  sub: Scalars['String'];
   updatedAt: Scalars['Date'];
-  username: Scalars['String'];
   verified: Scalars['Boolean'];
 };
 
@@ -299,7 +300,7 @@ export type LocationResolvers<ContextType = ApolloContext, ParentType extends Re
 
 export type MutationResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createPost?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'location' | 'photoURL' | 'userId'>>;
-  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'auth0UserId' | 'email' | 'username'>>;
+  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'first_name' | 'last_name' | 'sub'>>;
   deletePost?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDeletePostArgs, 'id'>>;
   updatePost?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<MutationUpdatePostArgs, 'id'>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
@@ -331,17 +332,18 @@ export type QueryResolvers<ContextType = ApolloContext, ParentType extends Resol
 }>;
 
 export type UserResolvers<ContextType = ApolloContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
-  auth0UserId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  first_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   homeLocation?: Resolver<Maybe<ResolversTypes['Location']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  last_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>;
   profileImageURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sub?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
